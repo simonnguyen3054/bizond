@@ -1,0 +1,69 @@
+type Query {
+  message: String!
+  getUsers(userId: ID!): User
+  getProducts(offset: Int, limit: Int): [Product]
+  getOrders(offset: Int, limit: Int): [Order]
+  getProductsByUserId(userId: ID!, offset: Int, limit: Int): [Product]
+  getOrdersByUserId(userId: ID!, offset: Int, limit: Int): [Order]
+  getNotificationsByUserId(userId: ID!, offset: Int, limit: Int): [Notification]
+  searchUsers(searchQuery: String): [User]
+  searchProducts(searchQuery: String): [Product]
+  searchOrders(searchQuery: String): [Order]
+}
+
+type Mutation {
+  product(
+    text: String
+    image: String
+    weight: Int
+    size: String
+    color: String
+    dimension: String
+    print: String
+  ): Product
+  removeProduct(id: ID!): ID
+  removeNotification(id: ID!): ID
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  bio: String
+  email: String!
+  username: String!
+  password: String!
+  image: String
+  coverImage: String
+  productsCount: Int!
+  createdAt: String!
+}
+
+type Product {
+  id: ID!
+  text: String
+  image: String
+  author: ID!
+  ordersCount: Int!
+  weight: Int
+  size: String
+  color: String
+  dimension: String
+  print: String
+  favoriteByUser: Boolean
+  createdAt: String!
+}
+
+type Order {
+  id: ID!
+  productId: ID!
+  orderedBy: ID!
+  createdAt: String!
+}
+
+type Notification {
+  id: ID!
+  text: String!
+  orderId: ID!
+  createdAt: String!
+}
